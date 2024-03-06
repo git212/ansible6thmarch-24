@@ -1,0 +1,11 @@
+- hosts: web[0]
+  tasks:
+    - name: Check if app is healthy
+      uri:
+        url: "http://3.109.124.62/"
+        return_content: true
+      register: info
+    - name: Run this task if file exists
+      debug:
+        msg: "App is healthy"
+      when: info.status == 200
